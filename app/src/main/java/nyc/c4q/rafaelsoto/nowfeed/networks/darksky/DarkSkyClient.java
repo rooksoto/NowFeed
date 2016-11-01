@@ -19,7 +19,7 @@ public class DarkSkyClient {
 
     private final DarkSkyApi api;
 
-    public DarkSkyClient getInstance() {
+    public static DarkSkyClient getInstance() {
         if (instance == null) {
             instance = new DarkSkyClient();
         }
