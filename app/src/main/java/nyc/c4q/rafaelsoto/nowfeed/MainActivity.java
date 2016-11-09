@@ -7,13 +7,16 @@ import android.support.v7.widget.RecyclerView;
 import android.widget.Toast;
 
 import nyc.c4q.rafaelsoto.nowfeed.models.darksky.Forecast;
+import nyc.c4q.rafaelsoto.nowfeed.models.geolocation.GeoLocation;
 import nyc.c4q.rafaelsoto.nowfeed.networks.darksky.DarkSkyClient;
+import nyc.c4q.rafaelsoto.nowfeed.networks.geolocation.GeoLocationClient;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
 public class MainActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
+    private GeoLocationClient geoLocation;
     private DarkSkyClient darkSkyClient;
 
     @Override
@@ -25,12 +28,31 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(new CardAdapter());
 
-        createWeatherCard();
+        initGeoLocation(); //will also call initWeatherCard within
     }
 
-    public void createWeatherCard() {
+
+    private void initGeoLocation() {
+        geoLocation = GeoLocationClient.getInstance();
+        Call<GeoLocation> call = geoLocation.getLocation();
+        call.enqueue(new Callback<GeoLocation>() {
+            @Override
+            public void onResponse(Call<GeoLocation> call, Response<GeoLocation> response) {
+                GeoLocation location = response.body();
+                String latLon = location.getLat() + ", " + location.getLon();
+                initWeatherCard(latLon);
+            }
+
+            @Override
+            public void onFailure(Call<GeoLocation> call, Throwable t) {
+                Toast.makeText(MainActivity.this, "Error getting location data", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    private void initWeatherCard(String latLon) {
         darkSkyClient = DarkSkyClient.getInstance();
-        Call<Forecast> call = darkSkyClient.getForecast("70,-40"); //Fixed lat, lon but will revise later
+        Call<Forecast> call = darkSkyClient.getForecast(latLon); //Fixed lat, lon but will revise later
         call.enqueue(new Callback<Forecast>() {
             @Override
             public void onResponse(Call<Forecast> call, Response<Forecast> response) {
@@ -38,6 +60,7 @@ public class MainActivity extends AppCompatActivity {
                 CardAdapter cardAdapter = (CardAdapter) recyclerView.getAdapter(); //Get reference to cardAdapter from the recyclerView
                 cardAdapter.addToDataList(forecast); //Add the Forecast object to the data list in the adapter (first card)
                 cardAdapter.addToDataList(new User("JJ")); //Example of adding another object to the data list (another card)
+
             }
 
             @Override

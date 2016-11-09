@@ -3,4 +3,11 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
+
+    <color name="ninetyAlphaWhite">#90FFFFFF</color>
+    <color name="fourtyAlphaBlue">#4080DEEA</color>
+    <color name="seventyAlphaBlue">#7080DEEA</color>
+    <color name="ninetyAlphaBlue">#9080DEEA</color>
+    <color name="fourtyAlphaPink">#40F06292</color>
+    <color name="fourtyAlphaGray">#40616161</color>
 </resources>
