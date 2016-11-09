@@ -7,7 +7,11 @@ import android.support.v7.widget.RecyclerView;
 import android.widget.Toast;
 
 import nyc.c4q.rafaelsoto.nowfeed.models.darksky.Forecast;
+import nyc.c4q.rafaelsoto.nowfeed.models.newsapi.Articles;
+import nyc.c4q.rafaelsoto.nowfeed.models.newsapi.NewsFeed;
 import nyc.c4q.rafaelsoto.nowfeed.networks.darksky.DarkSkyClient;
+import nyc.c4q.rafaelsoto.nowfeed.networks.newsapi.NewsApi;
+import nyc.c4q.rafaelsoto.nowfeed.networks.newsapi.NewsApiClient;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -15,6 +19,7 @@ import retrofit2.Response;
 public class MainActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private DarkSkyClient darkSkyClient;
+    private NewsApiClient newsApiClient;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,4 +51,22 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
+//    public void createNewsCard() {
+//        newsApiClient = NewsApiClient.getInstance();
+//        Call<NewsFeed> call = NewsApiClient.getArticles();
+//        call.enqueue(new Callback<NewsFeed>() {
+//            @Override
+//            public void onResponse(Call<NewsFeed> call, Response<NewsFeed> response) {
+//                NewsFeed newsFeed = response.body();
+//                CardAdapter newsCardAdapter = (CardAdapter) recyclerView.getAdapter();
+//                newsCardAdapter.addToDataList(newsFeed);
+//            }
+//
+//            @Override
+//            public void onFailure(Call<NewsFeed> call, Throwable t) {
+//
+//            }
+//        });
+//    }
 }
