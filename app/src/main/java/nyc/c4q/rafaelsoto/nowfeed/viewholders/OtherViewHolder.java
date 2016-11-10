@@ -8,13 +8,18 @@ import android.widget.TextView;
 
 import nyc.c4q.rafaelsoto.nowfeed.R;
 import nyc.c4q.rafaelsoto.nowfeed.User;
+import nyc.c4q.rafaelsoto.nowfeed.fragments.youtube.YoutubePlayerFragment;
 
 /**
  * Created by dannylui on 10/31/16.
  */
 public class OtherViewHolder extends RecyclerView.ViewHolder {
+
     private final View mView;
     private TextView infoView;
+
+    private YoutubePlayerFragment youtubePlayerFragment;
+
     public OtherViewHolder(ViewGroup parent) {
         super(inflateView(parent));
         mView = itemView;

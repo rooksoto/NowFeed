@@ -20,7 +20,6 @@ public class CardAdapter extends RecyclerView.Adapter {
     //1. Add a final number to your "card", example: YOUTUBE = 2, and so on...
     private final int WEATHER = 0, USER = 1;
 
-
     @Override
     public int getItemViewType(int position) {
         if (dataList.get(position) instanceof Forecast) {
