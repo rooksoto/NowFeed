@@ -8,18 +8,20 @@ import android.view.ViewGroup;
 import nyc.c4q.rafaelsoto.nowfeed.R;
 
 /**
- * Created by Rook on 10/31/16.
+ * Created by rook on 11/10/16.
  */
-public class DefaultViewHolder extends RecyclerView.ViewHolder {
+public class NewsViewHolder extends RecyclerView.ViewHolder {
+
     private final View mView;
-    public DefaultViewHolder(ViewGroup parent) {
+
+    public NewsViewHolder(ViewGroup parent) {
         super(inflateView(parent));
         mView = itemView;
     }
 
     private static View inflateView(ViewGroup parent) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-        return inflater.inflate(R.layout.default_card_layout, parent, false);
+        return inflater.inflate(R.layout.news_card_layout, parent, false);
     }
 
     public void bind(Object data) {

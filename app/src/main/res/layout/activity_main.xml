@@ -1,42 +1,68 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
     android:id="@+id/activity_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="nyc.c4q.rafaelsoto.nowfeed.MainActivity">
 
-    <!-- Background image or gif -->
+    <!-- Header image or gif-->
     <ImageView
-        android:id="@+id/background_view"
+        android:id="@+id/header_view"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:scaleType="fitXY"
-        android:background="#40000000"/>
+        android:layout_height="130dp"
+        android:background="#80000000"/>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
     <!-- Root layout (our code) -->
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:weightSum="10">
+        android:background="@color/colorPrimaryDark">
 
-        <!-- Header image or gif-->
-        <ImageView
-            android:id="@+id/header_view"
+        <TextView
+            android:text="Weather Feed"
+            android:paddingTop="10dp"
+            android:gravity="center"
+            android:textColor="@color/colorAccent"
+            android:textSize="30sp"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="3"
-            android:background="#80000000"/>
+            android:layout_height="wrap_content" />
 
-        <!-- Recycler view -->
+        <!-- Main Recycler View (Holds Weather) -->
         <android.support.v7.widget.RecyclerView
-            android:id="@+id/recycler_view"
+            android:id="@+id/weather_recycler"
+            android:background="@color/colorPrimaryDark"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="7">
+            android:layout_height="160dp">
+
+        </android.support.v7.widget.RecyclerView>
+
+        <TextView
+            android:text="News Feed"
+            android:paddingTop="10dp"
+            android:textColor="@color/colorAccent"
+            android:textSize="30sp"
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <!-- News Recycler View -->
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/news_recycler"
+            android:background="@color/colorPrimaryDark"
+            android:layout_width="match_parent"
+            android:layout_height="250dp">
 
         </android.support.v7.widget.RecyclerView>
     </LinearLayout>
 
-</RelativeLayout>
+    </ScrollView>
+
+</LinearLayout>

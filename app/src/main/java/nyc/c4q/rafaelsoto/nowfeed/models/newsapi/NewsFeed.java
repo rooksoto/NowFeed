@@ -1,12 +1,14 @@
 package nyc.c4q.rafaelsoto.nowfeed.models.newsapi;
 
+import retrofit2.Call;
+
 /**
  * Created by rook on 11/4/16.
  */
 
 public class NewsFeed
 {
-    private Articles[] articles;
+    private static Articles[] articles;
 
     private String sortBy;
 
@@ -14,10 +16,10 @@ public class NewsFeed
 
     private String status;
 
-    public Articles[] getArticles ()
-    {
-        return articles;
-    }
+//    public Articles[] getArticles ()
+//    {
+//        return articles;
+//    }
 
     public String getSortBy ()
     {

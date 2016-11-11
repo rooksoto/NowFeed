@@ -1,5 +1,9 @@
 package nyc.c4q.rafaelsoto.nowfeed.networks.newsapi;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
+import nyc.c4q.rafaelsoto.nowfeed.models.newsapi.Articles;
 import nyc.c4q.rafaelsoto.nowfeed.models.newsapi.NewsFeed;
 import retrofit2.Call;
 import retrofit2.Retrofit;
@@ -11,11 +15,9 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class NewsApiClient {
 
-    private static final String API_URL = "https://newsapi.org/";
-    private static final String API_KEY = "440d6e9538a94418811caba3b46e2761";
+    private static final String BASE_URL = "https://newsapi.org/";
 
     private static NewsApiClient instance;
-
     private final NewsApi api;
 
     public static NewsApiClient getInstance() {
@@ -26,14 +28,17 @@ public class NewsApiClient {
     }
 
     private NewsApiClient() {
+
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(API_URL)
+                .baseUrl(BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         api = retrofit.create(NewsApi.class);
     }
 
-    public Call<NewsFeed> getArticles(String apiKey) {
-        return api.getArticles(API_KEY);
+     public Call<Articles> getArticles() {
+        return api.getArticles();
     }
+
+
 }
