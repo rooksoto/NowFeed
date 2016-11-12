@@ -18,7 +18,7 @@ public class CardAdapter extends RecyclerView.Adapter {
     private List<Object> dataList = new ArrayList<Object>(); //List of objects, anything can be placed in here
 
     //1. Add a final number to your "card", example: YOUTUBE = 2, and so on...
-    private final int WEATHER = 0, USER = 1;
+    private final int WEATHER = 0, YOUTUBE = 1;
 
 
     @Override
@@ -28,7 +28,7 @@ public class CardAdapter extends RecyclerView.Adapter {
             return WEATHER;
         } else if (dataList.get(position) instanceof User) {
             System.out.println("getItemViewType: user");
-            return USER;
+            return YOUTUBE;
         } //2. getItemViewType() returns constant number depending on the type of object in the dataList
           //   then feeds it to onCreateViewHolder() to inflate a viewholder depending on that constant number
           //   - essentially allows different view holders for the same adapter (in our case, different cards)
@@ -46,7 +46,7 @@ public class CardAdapter extends RecyclerView.Adapter {
                 System.out.println("Inflating viewHolder: weather");
                 viewHolder = new WeatherViewHolder(parent);
                 break;
-            case USER:
+            case YOUTUBE:
                 System.out.println("Inflating viewHolder: user");
                 viewHolder = new OtherViewHolder(parent);
                 break;
@@ -70,7 +70,7 @@ public class CardAdapter extends RecyclerView.Adapter {
                 WeatherViewHolder weatherViewHolder = (WeatherViewHolder) holder;
                 weatherViewHolder.bind(dataList.get(position));
                 break;
-            case USER:
+            case YOUTUBE:
                 OtherViewHolder otherViewHolder = (OtherViewHolder) holder;
                 otherViewHolder.bind(dataList.get(position));
                 break;
