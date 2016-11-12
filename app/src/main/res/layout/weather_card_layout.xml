@@ -1,296 +1,310 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<!-- A CardView that contains a TextView -->
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/card_view"
     android:layout_width="match_parent"
     android:layout_height="250dp"
-    android:padding="16dp">
+    android:layout_margin="10dp"
+    card_view:cardCornerRadius="10dp"
+    card_view:cardElevation="10dp">
 
-    <!-- A CardView that contains a TextView -->
-    <android.support.v7.widget.CardView
-        xmlns:card_view="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/card_view"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="200dp"
-        card_view:cardCornerRadius="10dp"
-        card_view:cardElevation="10dp">
+        android:layout_height="match_parent"
+        android:background="@drawable/weather_card_bg"
+        android:orientation="vertical">
 
-        <LinearLayout
-            android:orientation="vertical"
+        <!-- Details -->
+        <TextView
+            android:id="@+id/detail_view"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@drawable/weather_card_bg">
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="defails along this line" />
 
-            <!-- Details -->
+        <!-- Icon and Current Temp -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="5"
+            android:background="#10000000"
+            android:orientation="horizontal">
+
+            <FrameLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+
+                <ImageView
+                    android:id="@+id/current_icon_view"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="30dp"
+                    android:scaleType="fitXY" />
+
+            </FrameLayout>
+
+
             <TextView
-                android:id="@+id/detail_view"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:text="defails along this line"
+                android:id="@+id/current_temp_view"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:gravity="center"/>
+                android:gravity="center"
+                android:paddingRight="10dp"
+                android:text="xml"
+                android:textSize="70sp"
+                android:textStyle="bold" />
 
-            <!-- Icon and Current Temp -->
+        </LinearLayout>
+
+        <!-- 5 Day Forecast -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="4"
+            android:orientation="horizontal">
+
+            <!-- Day One -->
             <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="5"
-                android:background="#10000000">
-
-                <FrameLayout
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1">
-
-                    <ImageView
-                        android:id="@+id/current_icon_view"
-                        android:layout_width="100dp"
-                        android:layout_height="100dp"
-                        android:layout_gravity="center"
-                        android:scaleType="fitXY"
-                        android:layout_marginLeft="30dp"/>
-
-                </FrameLayout>
-
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@color/fourtyAlphaBlue"
+                android:orientation="vertical">
 
                 <TextView
-                    android:id="@+id/current_temp_view"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
+                    android:id="@+id/day_one_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:background="@color/ninetyAlphaWhite"
+                    android:gravity="center"
+                    android:text="Sun" />
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="2">
+
+                    <ImageView
+                        android:id="@+id/day_one_icon_view"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_gravity="center"
+                        android:scaleType="fitXY" />
+                </FrameLayout>
+
+                <TextView
+                    android:id="@+id/day_one_hi_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
                     android:layout_weight="1"
                     android:gravity="center"
-                    android:textSize="70sp"
-                    android:textStyle="bold"
-                    android:text="xml"
-                    android:paddingRight="10dp"/>
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/day_one_lo_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:gravity="center" />
 
             </LinearLayout>
 
-            <!-- 5 Day Forecast -->
+            <!-- Day Two -->
             <LinearLayout
-                android:orientation="horizontal"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:layout_weight="4">
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@color/ninetyAlphaBlue"
+                android:orientation="vertical">
 
-                <!-- Day One -->
-                <LinearLayout
-                    android:orientation="vertical"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
+                <TextView
+                    android:id="@+id/day_two_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
                     android:layout_weight="1"
-                    android:background="@color/fourtyAlphaBlue">
+                    android:background="@color/ninetyAlphaWhite"
+                    android:gravity="center"
+                    android:text="Sun" />
 
-                    <TextView
-                        android:id="@+id/day_one_view"
-                        android:layout_width="match_parent"
-                        android:layout_height="0dp"
-                        android:layout_weight="1"
-                        android:background="@color/ninetyAlphaWhite"
-                        android:text="Sun"
-                        android:gravity="center"/>
-                    <FrameLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="0dp"
-                        android:layout_weight="2">
-                        <ImageView
-                            android:id="@+id/day_one_icon_view"
-                            android:layout_width="40dp"
-                            android:layout_height="40dp"
-                            android:layout_gravity="center"
-                            android:scaleType="fitXY"/>
-                    </FrameLayout>
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="2">
 
-                    <TextView
-                        android:id="@+id/day_one_hi_view"
-                        android:layout_width="match_parent"
-                        android:layout_height="0dp"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:textStyle="bold" />
-                    <TextView
-                        android:id="@+id/day_one_lo_view"
-                        android:layout_width="match_parent"
-                        android:layout_height="0dp"
-                        android:layout_weight="1"
-                        android:gravity="center"/>
+                    <ImageView
+                        android:id="@+id/day_two_icon_view"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_gravity="center"
+                        android:scaleType="fitXY" />
+                </FrameLayout>
 
-                </LinearLayout>
-
-                <!-- Day Two -->
-                <LinearLayout
-                    android:orientation="vertical"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
+                <TextView
+                    android:id="@+id/day_two_hi_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
                     android:layout_weight="1"
-                    android:background="@color/ninetyAlphaBlue">
+                    android:gravity="center"
+                    android:textStyle="bold" />
 
-                    <TextView
-                        android:id="@+id/day_two_view"
-                        android:layout_width="match_parent"
-                        android:layout_height="0dp"
-                        android:layout_weight="1"
-                        android:background="@color/ninetyAlphaWhite"
-                        android:text="Sun"
-                        android:gravity="center"/>
-                    <FrameLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="0dp"
-                        android:layout_weight="2">
-                        <ImageView
-                            android:id="@+id/day_two_icon_view"
-                            android:layout_width="40dp"
-                            android:layout_height="40dp"
-                            android:layout_gravity="center"
-                            android:scaleType="fitXY"/>
-                    </FrameLayout>
-                    <TextView
-                        android:id="@+id/day_two_hi_view"
-                        android:layout_width="match_parent"
-                        android:layout_height="0dp"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:textStyle="bold"/>
-                    <TextView
-                        android:id="@+id/day_two_lo_view"
-                        android:layout_width="match_parent"
-                        android:layout_height="0dp"
-                        android:layout_weight="1"
-                        android:gravity="center"/>
-
-                </LinearLayout>
-
-                <!-- Day Three -->
-                <LinearLayout
-                    android:orientation="vertical"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
+                <TextView
+                    android:id="@+id/day_two_lo_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
                     android:layout_weight="1"
-                    android:background="@color/seventyAlphaBlue">
+                    android:gravity="center" />
 
-                    <TextView
-                        android:id="@+id/day_three_view"
-                        android:layout_width="match_parent"
-                        android:layout_height="0dp"
-                        android:layout_weight="1"
-                        android:background="@color/ninetyAlphaWhite"
-                        android:text="Sun"
-                        android:gravity="center"/>
-                    <FrameLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="0dp"
-                        android:layout_weight="2">
-                        <ImageView
-                            android:id="@+id/day_three_icon_view"
-                            android:layout_width="40dp"
-                            android:layout_height="40dp"
-                            android:layout_gravity="center"
-                            android:scaleType="fitXY"/>
-                    </FrameLayout>
-                    <TextView
-                        android:id="@+id/day_three_hi_view"
-                        android:layout_width="match_parent"
-                        android:layout_height="0dp"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:textStyle="bold"/>
-                    <TextView
-                        android:id="@+id/day_three_lo_view"
-                        android:layout_width="match_parent"
-                        android:layout_height="0dp"
-                        android:layout_weight="1"
-                        android:gravity="center"/>
+            </LinearLayout>
 
-                </LinearLayout>
+            <!-- Day Three -->
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@color/seventyAlphaBlue"
+                android:orientation="vertical">
 
-                <!-- Day Four -->
-                <LinearLayout
-                    android:orientation="vertical"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
+                <TextView
+                    android:id="@+id/day_three_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
                     android:layout_weight="1"
-                    android:background="@color/fourtyAlphaGray">
+                    android:background="@color/ninetyAlphaWhite"
+                    android:gravity="center"
+                    android:text="Sun" />
 
-                    <TextView
-                        android:id="@+id/day_four_view"
-                        android:layout_width="match_parent"
-                        android:layout_height="0dp"
-                        android:layout_weight="1"
-                        android:background="@color/ninetyAlphaWhite"
-                        android:text="Sun"
-                        android:gravity="center"/>
-                    <FrameLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="0dp"
-                        android:layout_weight="2">
-                        <ImageView
-                            android:id="@+id/day_four_icon_view"
-                            android:layout_width="40dp"
-                            android:layout_height="40dp"
-                            android:layout_gravity="center"
-                            android:scaleType="fitXY"/>
-                    </FrameLayout>
-                    <TextView
-                        android:id="@+id/day_four_hi_view"
-                        android:layout_width="match_parent"
-                        android:layout_height="0dp"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:textStyle="bold"/>
-                    <TextView
-                        android:id="@+id/day_four_lo_view"
-                        android:layout_width="match_parent"
-                        android:layout_height="0dp"
-                        android:layout_weight="1"
-                        android:gravity="center"/>
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="2">
 
-                </LinearLayout>
+                    <ImageView
+                        android:id="@+id/day_three_icon_view"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_gravity="center"
+                        android:scaleType="fitXY" />
+                </FrameLayout>
 
-                <!-- Day Five -->
-                <LinearLayout
-                    android:orientation="vertical"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
+                <TextView
+                    android:id="@+id/day_three_hi_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
                     android:layout_weight="1"
-                    android:background="@color/fourtyAlphaPink">
+                    android:gravity="center"
+                    android:textStyle="bold" />
 
-                    <TextView
-                        android:id="@+id/day_five_view"
-                        android:layout_width="match_parent"
-                        android:layout_height="0dp"
-                        android:layout_weight="1"
-                        android:background="@color/ninetyAlphaWhite"
-                        android:text="Sun"
-                        android:gravity="center"/>
-                    <FrameLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="0dp"
-                        android:layout_weight="2">
-                        <ImageView
-                            android:id="@+id/day_five_icon_view"
-                            android:layout_width="40dp"
-                            android:layout_height="40dp"
-                            android:layout_gravity="center"
-                            android:scaleType="fitXY"/>
-                    </FrameLayout>
-                    <TextView
-                        android:id="@+id/day_five_hi_view"
-                        android:layout_width="match_parent"
-                        android:layout_height="0dp"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:textStyle="bold"/>
-                    <TextView
-                        android:id="@+id/day_five_lo_view"
-                        android:layout_width="match_parent"
-                        android:layout_height="0dp"
-                        android:layout_weight="1"
-                        android:gravity="center"/>
+                <TextView
+                    android:id="@+id/day_three_lo_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:gravity="center" />
 
-                </LinearLayout>
+            </LinearLayout>
+
+            <!-- Day Four -->
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@color/fourtyAlphaGray"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/day_four_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:background="@color/ninetyAlphaWhite"
+                    android:gravity="center"
+                    android:text="Sun" />
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="2">
+
+                    <ImageView
+                        android:id="@+id/day_four_icon_view"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_gravity="center"
+                        android:scaleType="fitXY" />
+                </FrameLayout>
+
+                <TextView
+                    android:id="@+id/day_four_hi_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/day_four_lo_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:gravity="center" />
+
+            </LinearLayout>
+
+            <!-- Day Five -->
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@color/fourtyAlphaPink"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/day_five_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:background="@color/ninetyAlphaWhite"
+                    android:gravity="center"
+                    android:text="Sun" />
+
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="2">
+
+                    <ImageView
+                        android:id="@+id/day_five_icon_view"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_gravity="center"
+                        android:scaleType="fitXY" />
+                </FrameLayout>
+
+                <TextView
+                    android:id="@+id/day_five_hi_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/day_five_lo_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:gravity="center" />
 
             </LinearLayout>
 
         </LinearLayout>
 
-    </android.support.v7.widget.CardView>
-</FrameLayout>
+    </LinearLayout>
+
+</android.support.v7.widget.CardView>
