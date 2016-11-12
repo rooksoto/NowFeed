@@ -16,10 +16,10 @@ public class NewsFeed
 
     private String status;
 
-//    public Articles[] getArticles ()
-//    {
-//        return articles;
-//    }
+    public Articles[] getArticles ()
+    {
+        return articles;
+    }
 
     public String getSortBy ()
     {
