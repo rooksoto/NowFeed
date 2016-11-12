@@ -10,7 +10,7 @@ import android.widget.Toast;
 
 import nyc.c4q.rafaelsoto.nowfeed.models.darksky.Forecast;
 import nyc.c4q.rafaelsoto.nowfeed.models.geolocation.GeoLocation;
-import nyc.c4q.rafaelsoto.nowfeed.models.newsapi.Articles;
+import nyc.c4q.rafaelsoto.nowfeed.models.newsapi.NewsFeed;
 import nyc.c4q.rafaelsoto.nowfeed.models.youtube.YoutubeItem;
 import nyc.c4q.rafaelsoto.nowfeed.networks.darksky.DarkSkyClient;
 import nyc.c4q.rafaelsoto.nowfeed.networks.geolocation.GeoLocationClient;
@@ -95,17 +95,19 @@ public class MainActivity extends AppCompatActivity {
 
     public void createNewsCards() {
         newsApiClient = NewsApiClient.getInstance();
-        Call<Articles> call = newsApiClient.getArticles();
-        call.enqueue(new Callback<Articles>() {
+        Call<NewsFeed> call = newsApiClient.getArticles();
+        call.enqueue(new Callback<NewsFeed>() {
             @Override
-            public void onResponse(Call<Articles> call, Response<Articles> response) {
-                Articles articles = response.body();
+            public void onResponse(Call<NewsFeed> call, Response<NewsFeed> response) {
+                NewsFeed newsFeed = response.body();
                 CardAdapter cardAdapter = (CardAdapter) recyclerView.getAdapter();
-                cardAdapter.addToDataList(articles);
+                cardAdapter.addToDataList(newsFeed);
+                System.out.println(response.body().toString());
+
             }
 
             @Override
-            public void onFailure(Call<Articles> call, Throwable t) {
+            public void onFailure(Call<NewsFeed> call, Throwable t) {
 
                 Toast.makeText(getBaseContext(), "Error getting data from News-API.Org.", Toast.LENGTH_SHORT).show();
 

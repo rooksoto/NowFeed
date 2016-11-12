@@ -6,8 +6,7 @@ import android.view.ViewGroup;
 import java.util.ArrayList;
 import java.util.List;
 
-import nyc.c4q.rafaelsoto.nowfeed.models.newsapi.Articles;
-import nyc.c4q.rafaelsoto.nowfeed.viewholders.NewsViewHolder;
+import nyc.c4q.rafaelsoto.nowfeed.models.newsapi.Article;
 
 
 /**
@@ -17,31 +16,29 @@ import nyc.c4q.rafaelsoto.nowfeed.viewholders.NewsViewHolder;
 
 public class NewsCardAdapter extends RecyclerView.Adapter {
 
-    private List<Articles> articleList = new ArrayList<>();
+    private List<Article> articlesList = new ArrayList<>();
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-
-        RecyclerView.ViewHolder viewHolder;
-        viewHolder = new NewsViewHolder(parent);
-        return viewHolder;
+        return new ArticleViewHolder(parent);
     }
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
 
-        NewsViewHolder newsViewHolder = (NewsViewHolder) holder;
-        newsViewHolder.bind(articleList.get(position));
+        ArticleViewHolder articleViewHolder = (ArticleViewHolder) holder;
+        articleViewHolder.bind(articlesList.get(position));
+
 
     }
 
     @Override
     public int getItemCount() {
-        return articleList.size();
+        return articlesList.size();
     }
 
-    public void addArticles (Articles articles) {
-        articleList.add(articles);
+    public void setArticlesList(List<Article> articlesList) {
+        this.articlesList = articlesList;
         notifyDataSetChanged(); //Added this because Danny is brilliant, and he said so.
                                 //Joking... I understand why the notification must take place.
     }

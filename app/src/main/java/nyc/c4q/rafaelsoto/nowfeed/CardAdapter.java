@@ -7,12 +7,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import nyc.c4q.rafaelsoto.nowfeed.models.darksky.Forecast;
-import nyc.c4q.rafaelsoto.nowfeed.models.newsapi.Articles;
+import nyc.c4q.rafaelsoto.nowfeed.models.newsapi.NewsFeed;
 import nyc.c4q.rafaelsoto.nowfeed.models.youtube.YoutubeItem;
 import nyc.c4q.rafaelsoto.nowfeed.viewholders.DefaultViewHolder;
 import nyc.c4q.rafaelsoto.nowfeed.viewholders.NewsViewHolder;
-import nyc.c4q.rafaelsoto.nowfeed.viewholders.YoutubeViewHolder;
 import nyc.c4q.rafaelsoto.nowfeed.viewholders.WeatherViewHolder;
+import nyc.c4q.rafaelsoto.nowfeed.viewholders.YoutubeViewHolder;
 
 /**
  * Created by dannylui on 10/31/16.
@@ -31,7 +31,7 @@ public class CardAdapter extends RecyclerView.Adapter {
         } else if (dataList.get(position) instanceof YoutubeItem) {
             System.out.println("getItemViewType: user");
             return YOUTUBE;
-        } else if (dataList.get(position) instanceof Articles) {
+        } else if (dataList.get(position) instanceof NewsFeed) {
             System.out.println("getItemViewType: articles");
             return ARTICLES;
         }

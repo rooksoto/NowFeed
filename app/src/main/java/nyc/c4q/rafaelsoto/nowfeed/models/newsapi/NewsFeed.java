@@ -1,44 +1,32 @@
 package nyc.c4q.rafaelsoto.nowfeed.models.newsapi;
 
-import retrofit2.Call;
-
 /**
- * Created by rook on 11/4/16.
+ * Created by dannylui on 11/12/16.
  */
 
-public class NewsFeed
-{
-    private static Articles[] articles;
+import java.util.ArrayList;
+import java.util.List;
 
-    private String sortBy;
+public class NewsFeed {
 
-    private String source;
+    public String status;
+    public String source;
+    public String sortBy;
+    public List<Article> articles = new ArrayList<Article>();
 
-    private String status;
-
-    public Articles[] getArticles ()
-    {
-        return articles;
-    }
-
-    public String getSortBy ()
-    {
-        return sortBy;
-    }
-
-    public String getSource ()
-    {
-        return source;
-    }
-
-    public String getStatus ()
-    {
+    public String getStatus() {
         return status;
     }
 
-    @Override
-    public String toString()
-    {
-        return "ClassPojo [articles = "+articles+", sortBy = "+sortBy+", source = "+source+", status = "+status+"]";
+    public String getSource() {
+        return source;
+    }
+
+    public String getSortBy() {
+        return sortBy;
+    }
+
+    public List<Article> getArticles() {
+        return articles;
     }
 }

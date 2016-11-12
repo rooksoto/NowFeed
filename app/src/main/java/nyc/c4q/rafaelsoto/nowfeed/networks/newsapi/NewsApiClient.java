@@ -1,6 +1,5 @@
 package nyc.c4q.rafaelsoto.nowfeed.networks.newsapi;
 
-import nyc.c4q.rafaelsoto.nowfeed.models.newsapi.Articles;
 import nyc.c4q.rafaelsoto.nowfeed.models.newsapi.NewsFeed;
 import retrofit2.Call;
 import retrofit2.Retrofit;
@@ -33,7 +32,7 @@ public class NewsApiClient {
         api = retrofit.create(NewsApi.class);
     }
 
-    public Call<Articles> getArticles() {
+    public Call<NewsFeed> getArticles() {
         return api.getArticles();
     }
 }
