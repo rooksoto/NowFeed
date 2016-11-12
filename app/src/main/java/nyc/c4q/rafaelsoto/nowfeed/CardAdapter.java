@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import nyc.c4q.rafaelsoto.nowfeed.models.darksky.Forecast;
+import nyc.c4q.rafaelsoto.nowfeed.models.youtube.YoutubeItem;
 import nyc.c4q.rafaelsoto.nowfeed.viewholders.DefaultViewHolder;
 import nyc.c4q.rafaelsoto.nowfeed.viewholders.YoutubeViewHolder;
 import nyc.c4q.rafaelsoto.nowfeed.viewholders.WeatherViewHolder;
@@ -25,7 +26,7 @@ public class CardAdapter extends RecyclerView.Adapter {
         if (dataList.get(position) instanceof Forecast) {
             System.out.println("getItemViewType: weather");
             return WEATHER;
-        } else if (dataList.get(position) instanceof User) {
+        } else if (dataList.get(position) instanceof YoutubeItem) {
             System.out.println("getItemViewType: user");
             return USER;
         } //2. getItemViewType() returns constant number depending on the type of object in the dataList

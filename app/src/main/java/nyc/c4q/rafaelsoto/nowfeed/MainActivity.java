@@ -8,6 +8,7 @@ import android.widget.Toast;
 
 import nyc.c4q.rafaelsoto.nowfeed.models.darksky.Forecast;
 import nyc.c4q.rafaelsoto.nowfeed.models.geolocation.GeoLocation;
+import nyc.c4q.rafaelsoto.nowfeed.models.youtube.YoutubeItem;
 import nyc.c4q.rafaelsoto.nowfeed.networks.darksky.DarkSkyClient;
 import nyc.c4q.rafaelsoto.nowfeed.networks.geolocation.GeoLocationClient;
 import nyc.c4q.rafaelsoto.nowfeed.networks.newsapi.NewsApiClient;
@@ -36,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void initYoutubeCard() {
         CardAdapter cardAdapter = (CardAdapter) recyclerView.getAdapter();
-        cardAdapter.addToDataList(new User("JJ"));
+        cardAdapter.addToDataList(new YoutubeItem("youtube placeholder for the card adapter"));
     }
 
 
