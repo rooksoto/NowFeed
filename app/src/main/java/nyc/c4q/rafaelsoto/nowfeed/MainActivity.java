@@ -1,13 +1,16 @@
 package nyc.c4q.rafaelsoto.nowfeed;
 
+import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import nyc.c4q.rafaelsoto.nowfeed.models.darksky.Forecast;
 import nyc.c4q.rafaelsoto.nowfeed.models.geolocation.GeoLocation;
+import nyc.c4q.rafaelsoto.nowfeed.models.newsapi.Articles;
 import nyc.c4q.rafaelsoto.nowfeed.models.youtube.YoutubeItem;
 import nyc.c4q.rafaelsoto.nowfeed.networks.darksky.DarkSkyClient;
 import nyc.c4q.rafaelsoto.nowfeed.networks.geolocation.GeoLocationClient;
@@ -27,12 +30,25 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        final ImageView animImageView = (ImageView) findViewById(R.id.header_view);
+        animImageView.setBackgroundResource(R.drawable.anim);
+        animImageView.setImageAlpha(5);
+        animImageView.post(new Runnable() {
+            @Override
+            public void run() {
+                AnimationDrawable frameAnimation =
+                        (AnimationDrawable) animImageView.getBackground();
+                frameAnimation.start();
+            }
+        });
+
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(new CardAdapter());
 
         initYoutubeCard();
         initGeoLocation(); //will also call initWeatherCard within
+        createNewsCards();
     }
 
     private void initYoutubeCard() {
@@ -77,21 +93,24 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-//    public void createNewsCard() {
-//        newsApiClient = NewsApiClient.getInstance();
-//        Call<NewsFeed> call = NewsApiClient.getArticles();
-//        call.enqueue(new Callback<NewsFeed>() {
-//            @Override
-//            public void onResponse(Call<NewsFeed> call, Response<NewsFeed> response) {
-//                NewsFeed newsFeed = response.body();
-//                CardAdapter newsCardAdapter = (CardAdapter) recyclerView.getAdapter();
-//                newsCardAdapter.addToDataList(newsFeed);
-//            }
-//
-//            @Override
-//            public void onFailure(Call<NewsFeed> call, Throwable t) {
-//
-//            }
-//        });
-//    }
+    public void createNewsCards() {
+        newsApiClient = NewsApiClient.getInstance();
+        Call<Articles> call = newsApiClient.getArticles();
+        call.enqueue(new Callback<Articles>() {
+            @Override
+            public void onResponse(Call<Articles> call, Response<Articles> response) {
+                Articles articles = response.body();
+                CardAdapter cardAdapter = (CardAdapter) recyclerView.getAdapter();
+                cardAdapter.addToDataList(articles);
+            }
+
+            @Override
+            public void onFailure(Call<Articles> call, Throwable t) {
+
+                Toast.makeText(getBaseContext(), "Error getting data from News-API.Org.", Toast.LENGTH_SHORT).show();
+
+            }
+
+        });
+    }
 }
