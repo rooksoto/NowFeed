@@ -8,7 +8,7 @@ import android.view.ViewGroup;
 import nyc.c4q.rafaelsoto.nowfeed.R;
 
 /**
- * Created by dannylui on 10/31/16.
+ * Created by Rook on 10/31/16.
  */
 public class DefaultViewHolder extends RecyclerView.ViewHolder {
     private final View mView;
