@@ -1,5 +1,8 @@
 package nyc.c4q.rafaelsoto.nowfeed;
 
+import android.content.ComponentName;
+import android.content.Intent;
+import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,17 +18,21 @@ import nyc.c4q.rafaelsoto.nowfeed.models.newsapi.Article;
  * Created by dannylui on 11/12/16.
  */
 public class ArticleViewHolder extends RecyclerView.ViewHolder {
-    private ImageView newsImage;
-    private TextView headline;
+    private ImageView articleImage;
+    private TextView articleHeadline;
+    private TextView articleAuthor;
+    private Intent intent;
 
     private final View mView;
+    private View.OnClickListener openArticleInBrowser;
 
     public ArticleViewHolder(ViewGroup parent) {
         super(inflateView(parent));
         mView = itemView;
 
-        newsImage = (ImageView) mView.findViewById(R.id.news_item_image);
-        headline = (TextView) mView.findViewById(R.id.news_item_headline);
+        articleImage = (ImageView) mView.findViewById(R.id.news_item_image);
+        articleHeadline = (TextView) mView.findViewById(R.id.news_item_headline);
+        articleAuthor = (TextView) mView.findViewById(R.id.news_item_author);
     }
 
     private static View inflateView(ViewGroup parent) {
@@ -33,16 +40,30 @@ public class ArticleViewHolder extends RecyclerView.ViewHolder {
         return inflater.inflate(R.layout.news_item_layout, parent, false);
     }
 
-    public void bind(Article article) {
+    public void bind(final Article article) {
+
         String title = article.getTitle();
-        String description = article.getDescription();
+        String author = "By: " + article.getAuthor();
+
         String imageUrl = article.getUrlToImage();
 
-        Glide.with(mView.getContext()).load(imageUrl).into(newsImage);
-        headline.setText(title);
+        final String url = article.getUrl();
 
+        Glide.with(mView.getContext()).load(imageUrl).into(articleImage);
+        articleHeadline.setText(title);
+        articleAuthor.setText(author);
 
+        articleHeadline.setOnClickListener(openArticleInBrowser);
+        articleImage.setOnClickListener(openArticleInBrowser);
+
+        openArticleInBrowser = new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+                v.getContext().startActivity(intent);
+
+            }
+        };
     }
-
-
 }
