@@ -7,16 +7,11 @@ import android.support.v7.widget.RecyclerView;
 import android.widget.Toast;
 
 import nyc.c4q.rafaelsoto.nowfeed.models.darksky.Forecast;
-
-import nyc.c4q.rafaelsoto.nowfeed.models.newsapi.Articles;
-import nyc.c4q.rafaelsoto.nowfeed.models.newsapi.NewsFeed;
-import nyc.c4q.rafaelsoto.nowfeed.networks.newsapi.NewsApi;
-import nyc.c4q.rafaelsoto.nowfeed.networks.newsapi.NewsApiClient;
-
 import nyc.c4q.rafaelsoto.nowfeed.models.geolocation.GeoLocation;
+import nyc.c4q.rafaelsoto.nowfeed.models.youtube.YoutubeItem;
 import nyc.c4q.rafaelsoto.nowfeed.networks.darksky.DarkSkyClient;
 import nyc.c4q.rafaelsoto.nowfeed.networks.geolocation.GeoLocationClient;
-
+import nyc.c4q.rafaelsoto.nowfeed.networks.newsapi.NewsApiClient;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -36,7 +31,13 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(new CardAdapter());
 
+        initYoutubeCard();
         initGeoLocation(); //will also call initWeatherCard within
+    }
+
+    private void initYoutubeCard() {
+        CardAdapter cardAdapter = (CardAdapter) recyclerView.getAdapter();
+        cardAdapter.addToDataList(new YoutubeItem("youtube placeholder for the card adapter"));
     }
 
 
@@ -67,8 +68,6 @@ public class MainActivity extends AppCompatActivity {
                 Forecast forecast = response.body(); //Get object from response.body in my case the api returns a Forecast object
                 CardAdapter cardAdapter = (CardAdapter) recyclerView.getAdapter(); //Get reference to cardAdapter from the recyclerView
                 cardAdapter.addToDataList(forecast); //Add the Forecast object to the data list in the adapter (first card)
-                cardAdapter.addToDataList(new User("JJ")); //Example of adding another object to the data list (another card)
-
             }
 
             @Override

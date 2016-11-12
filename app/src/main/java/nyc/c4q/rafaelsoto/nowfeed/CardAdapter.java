@@ -7,8 +7,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import nyc.c4q.rafaelsoto.nowfeed.models.darksky.Forecast;
+import nyc.c4q.rafaelsoto.nowfeed.models.youtube.YoutubeItem;
 import nyc.c4q.rafaelsoto.nowfeed.viewholders.DefaultViewHolder;
-import nyc.c4q.rafaelsoto.nowfeed.viewholders.OtherViewHolder;
+import nyc.c4q.rafaelsoto.nowfeed.viewholders.YoutubeViewHolder;
 import nyc.c4q.rafaelsoto.nowfeed.viewholders.WeatherViewHolder;
 
 /**
@@ -20,13 +21,12 @@ public class CardAdapter extends RecyclerView.Adapter {
     //1. Add a final number to your "card", example: YOUTUBE = 2, and so on...
     private final int WEATHER = 0, YOUTUBE = 1;
 
-
     @Override
     public int getItemViewType(int position) {
         if (dataList.get(position) instanceof Forecast) {
             System.out.println("getItemViewType: weather");
             return WEATHER;
-        } else if (dataList.get(position) instanceof User) {
+        } else if (dataList.get(position) instanceof YoutubeItem) {
             System.out.println("getItemViewType: user");
             return YOUTUBE;
         } //2. getItemViewType() returns constant number depending on the type of object in the dataList
@@ -48,7 +48,7 @@ public class CardAdapter extends RecyclerView.Adapter {
                 break;
             case YOUTUBE:
                 System.out.println("Inflating viewHolder: user");
-                viewHolder = new OtherViewHolder(parent);
+                viewHolder = new YoutubeViewHolder(parent);
                 break;
             //3. Inflating your personalized view holder...
             //   Add a case for <your_card_constant>
@@ -71,8 +71,8 @@ public class CardAdapter extends RecyclerView.Adapter {
                 weatherViewHolder.bind(dataList.get(position));
                 break;
             case YOUTUBE:
-                OtherViewHolder otherViewHolder = (OtherViewHolder) holder;
-                otherViewHolder.bind(dataList.get(position));
+                YoutubeViewHolder youtubeViewHolder = (YoutubeViewHolder) holder;
+                youtubeViewHolder.bind(dataList.get(position));
                 break;
             //4. Data that is in dataList.get(position) is the data you sent from MainActivity
             //   You'll then send this data to your view holder class here
