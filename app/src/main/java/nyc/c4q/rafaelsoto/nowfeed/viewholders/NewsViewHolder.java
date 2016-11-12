@@ -36,6 +36,7 @@ public class NewsViewHolder extends RecyclerView.ViewHolder {
     public void bind(Object data) {
 
         Articles articles = (Articles) data;
+        articles
 
         newsImage = (ImageView) mView.findViewById(R.id.news_item_image);
         headline = (TextView) mView.findViewById(R.id.news_item_headline);
