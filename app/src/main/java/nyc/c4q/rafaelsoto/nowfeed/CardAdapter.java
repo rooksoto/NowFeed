@@ -8,7 +8,7 @@ import java.util.List;
 
 import nyc.c4q.rafaelsoto.nowfeed.models.darksky.Forecast;
 import nyc.c4q.rafaelsoto.nowfeed.viewholders.DefaultViewHolder;
-import nyc.c4q.rafaelsoto.nowfeed.viewholders.OtherViewHolder;
+import nyc.c4q.rafaelsoto.nowfeed.viewholders.YoutubeViewHolder;
 import nyc.c4q.rafaelsoto.nowfeed.viewholders.WeatherViewHolder;
 
 /**
@@ -47,7 +47,7 @@ public class CardAdapter extends RecyclerView.Adapter {
                 break;
             case USER:
                 System.out.println("Inflating viewHolder: user");
-                viewHolder = new OtherViewHolder(parent);
+                viewHolder = new YoutubeViewHolder(parent);
                 break;
             //3. Inflating your personalized view holder...
             //   Add a case for <your_card_constant>
@@ -70,8 +70,8 @@ public class CardAdapter extends RecyclerView.Adapter {
                 weatherViewHolder.bind(dataList.get(position));
                 break;
             case USER:
-                OtherViewHolder otherViewHolder = (OtherViewHolder) holder;
-                otherViewHolder.bind(dataList.get(position));
+                YoutubeViewHolder youtubeViewHolder = (YoutubeViewHolder) holder;
+                youtubeViewHolder.bind(dataList.get(position));
                 break;
             //4. Data that is in dataList.get(position) is the data you sent from MainActivity
             //   You'll then send this data to your view holder class here
