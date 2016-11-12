@@ -1,6 +1,5 @@
 package nyc.c4q.rafaelsoto.nowfeed;
 
-import android.content.ComponentName;
 import android.content.Intent;
 import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
@@ -17,6 +16,7 @@ import nyc.c4q.rafaelsoto.nowfeed.models.newsapi.Article;
 /**
  * Created by dannylui on 11/12/16.
  */
+
 public class ArticleViewHolder extends RecyclerView.ViewHolder {
     private ImageView articleImage;
     private TextView articleHeadline;
@@ -24,7 +24,7 @@ public class ArticleViewHolder extends RecyclerView.ViewHolder {
     private Intent intent;
 
     private final View mView;
-    private View.OnClickListener openArticleInBrowser;
+    private View.OnClickListener openInBrowser;
 
     public ArticleViewHolder(ViewGroup parent) {
         super(inflateView(parent));
@@ -40,29 +40,28 @@ public class ArticleViewHolder extends RecyclerView.ViewHolder {
         return inflater.inflate(R.layout.news_item_layout, parent, false);
     }
 
-    public void bind(final Article article) {
+    void bind(Article article) {
 
         String title = article.getTitle();
         String author = "By: " + article.getAuthor();
 
         String imageUrl = article.getUrlToImage();
 
-        final String url = article.getUrl();
-
         Glide.with(mView.getContext()).load(imageUrl).into(articleImage);
         articleHeadline.setText(title);
         articleAuthor.setText(author);
 
-        articleHeadline.setOnClickListener(openArticleInBrowser);
-        articleImage.setOnClickListener(openArticleInBrowser);
+        articleHeadline.setOnClickListener(openInBrowser);
+        articleImage.setOnClickListener(openInBrowser);
 
-        openArticleInBrowser = new View.OnClickListener() {
+        intent = new Intent(Intent.ACTION_VIEW, Uri.parse(article.getUrl()));
+
+
+
+        openInBrowser = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
-                v.getContext().startActivity(intent);
-
+                mView.getContext().startActivity(intent);
             }
         };
     }
