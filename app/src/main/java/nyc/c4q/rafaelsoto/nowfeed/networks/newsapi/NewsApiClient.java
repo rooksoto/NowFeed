@@ -10,7 +10,7 @@ import retrofit2.converter.gson.GsonConverterFactory;
  */
 
 public class NewsApiClient {
-
+    private static final String API_KEY = "440d6e9538a94418811caba3b46e2761";
     private static final String API_URL = "https://newsapi.org/";
 
     private static NewsApiClient instance;
@@ -32,7 +32,7 @@ public class NewsApiClient {
         api = retrofit.create(NewsApi.class);
     }
 
-    public Call<NewsFeed> getArticles() {
-        return api.getArticles();
+    public Call<NewsFeed> getArticles(String source, String sortBy) {
+        return api.getArticles(source, sortBy, API_KEY);
     }
 }

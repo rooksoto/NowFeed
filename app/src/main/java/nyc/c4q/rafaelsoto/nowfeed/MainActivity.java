@@ -95,7 +95,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void createNewsCards() {
         newsApiClient = NewsApiClient.getInstance();
-        Call<NewsFeed> call = newsApiClient.getArticles();
+        Call<NewsFeed> call = newsApiClient.getArticles("the-next-web", "latest");
         call.enqueue(new Callback<NewsFeed>() {
             @Override
             public void onResponse(Call<NewsFeed> call, Response<NewsFeed> response) {

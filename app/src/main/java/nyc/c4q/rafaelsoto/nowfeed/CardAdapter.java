@@ -54,7 +54,7 @@ public class CardAdapter extends RecyclerView.Adapter {
                 viewHolder = new WeatherViewHolder(parent);
                 break;
             case YOUTUBE:
-                System.out.println("Inflating viewHolder: user");
+                System.out.println("Inflating viewHolder: youtube");
                 viewHolder = new YoutubeViewHolder(parent);
                 break;
             case ARTICLES:

@@ -3,6 +3,7 @@ package nyc.c4q.rafaelsoto.nowfeed.networks.newsapi;
 import nyc.c4q.rafaelsoto.nowfeed.models.newsapi.NewsFeed;
 import retrofit2.Call;
 import retrofit2.http.GET;
+import retrofit2.http.Query;
 
 /**
  * Created by rook on 11/4/16.
@@ -10,7 +11,11 @@ import retrofit2.http.GET;
 
 public interface NewsApi {
 
-    @GET("v1/articles?source=the-next-web&sortBy=latest&apiKey=440d6e9538a94418811caba3b46e2761")
-    Call<NewsFeed> getArticles();
+    @GET("v1/articles")
+    Call<NewsFeed> getArticles(
+            @Query("source") String source,
+            @Query("sortBy") String sortBy,
+            @Query("apiKey") String apiKey
+    );
 
 }
