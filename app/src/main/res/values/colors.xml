@@ -9,5 +9,6 @@
     <color name="seventyAlphaBlue">#7080DEEA</color>
     <color name="ninetyAlphaBlue">#9080DEEA</color>
     <color name="fourtyAlphaPink">#40F06292</color>
+    <color name="ninetyAlphaGray">#90616161</color>
     <color name="fourtyAlphaGray">#40616161</color>
 </resources>

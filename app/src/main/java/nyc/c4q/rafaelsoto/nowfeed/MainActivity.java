@@ -11,12 +11,13 @@ import android.widget.Toast;
 import nyc.c4q.rafaelsoto.nowfeed.models.darksky.Forecast;
 import nyc.c4q.rafaelsoto.nowfeed.models.geolocation.GeoLocation;
 import nyc.c4q.rafaelsoto.nowfeed.models.newsapi.NewsFeed;
-import nyc.c4q.rafaelsoto.nowfeed.models.tmdb.Result;
+import nyc.c4q.rafaelsoto.nowfeed.models.pokeapi.PokeModel;
 import nyc.c4q.rafaelsoto.nowfeed.models.tmdb.TmdbData;
 import nyc.c4q.rafaelsoto.nowfeed.models.youtube.YoutubeItem;
 import nyc.c4q.rafaelsoto.nowfeed.networks.darksky.DarkSkyClient;
 import nyc.c4q.rafaelsoto.nowfeed.networks.geolocation.GeoLocationClient;
 import nyc.c4q.rafaelsoto.nowfeed.networks.newsapi.NewsApiClient;
+import nyc.c4q.rafaelsoto.nowfeed.networks.pokeapi.PokeClient;
 import nyc.c4q.rafaelsoto.nowfeed.networks.tmdb.TmdbApiClient;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -28,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
     private DarkSkyClient darkSkyClient;
     private NewsApiClient newsApiClient;
     private TmdbApiClient tmdbApiClient;
+    private PokeClient pokeClient;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +56,7 @@ public class MainActivity extends AppCompatActivity {
         initGeoLocation(); //will also call initWeatherCard within
         createNewsCards();
         createMovieCards();
+        createPokeCard();
     }
 
     private void initYoutubeCard() {
@@ -136,6 +139,24 @@ public class MainActivity extends AppCompatActivity {
 
                 Toast.makeText(getBaseContext(), "Error getting data from TMDB.Org.", Toast.LENGTH_SHORT).show();
 
+            }
+        });
+    }
+
+    private void createPokeCard() {
+        pokeClient = PokeClient.getInstance();
+        Call<PokeModel> call = pokeClient.getPokemons("151");
+        call.enqueue(new Callback<PokeModel>() {
+            @Override
+            public void onResponse(Call<PokeModel> call, Response<PokeModel> response) {
+                PokeModel pokeModel = response.body();
+                CardAdapter cardAdapter = (CardAdapter) recyclerView.getAdapter();
+                cardAdapter.addToDataList(pokeModel);
+            }
+
+            @Override
+            public void onFailure(Call<PokeModel> call, Throwable t) {
+                Toast.makeText(getBaseContext(), "Error getting data from pokeapi.", Toast.LENGTH_SHORT).show();
             }
         });
     }

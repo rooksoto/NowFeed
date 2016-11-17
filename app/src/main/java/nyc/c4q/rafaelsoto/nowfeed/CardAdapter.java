@@ -8,11 +8,13 @@ import java.util.List;
 
 import nyc.c4q.rafaelsoto.nowfeed.models.darksky.Forecast;
 import nyc.c4q.rafaelsoto.nowfeed.models.newsapi.NewsFeed;
+import nyc.c4q.rafaelsoto.nowfeed.models.pokeapi.PokeModel;
 import nyc.c4q.rafaelsoto.nowfeed.models.tmdb.TmdbData;
 import nyc.c4q.rafaelsoto.nowfeed.models.youtube.YoutubeItem;
 import nyc.c4q.rafaelsoto.nowfeed.viewholders.DefaultViewHolder;
 import nyc.c4q.rafaelsoto.nowfeed.viewholders.MoviesViewHolder;
 import nyc.c4q.rafaelsoto.nowfeed.viewholders.NewsViewHolder;
+import nyc.c4q.rafaelsoto.nowfeed.viewholders.PokeViewHolder;
 import nyc.c4q.rafaelsoto.nowfeed.viewholders.WeatherViewHolder;
 import nyc.c4q.rafaelsoto.nowfeed.viewholders.YoutubeViewHolder;
 
@@ -23,7 +25,7 @@ public class CardAdapter extends RecyclerView.Adapter {
     private List<Object> dataList = new ArrayList<Object>(); //List of objects, anything can be placed in here
 
     //1. Add a final number to your "card", example: YOUTUBE = 2, and so on...
-    private final int WEATHER = 0, YOUTUBE = 1, ARTICLES = 2, MOVIES = 3;
+    private final int WEATHER = 0, YOUTUBE = 1, ARTICLES = 2, MOVIES = 3, POKEMON = 4;
 
     @Override
     public int getItemViewType(int position) {
@@ -39,6 +41,9 @@ public class CardAdapter extends RecyclerView.Adapter {
         } else if (dataList.get(position) instanceof TmdbData) {
             System.out.println("getItemViewType: movies");
             return MOVIES;
+        } else if (dataList.get(position) instanceof PokeModel) {
+            System.out.println("getItemViewType: pokemon");
+            return POKEMON;
         }
 
         //2. getItemViewType() returns constant number depending on the type of object in the dataList
@@ -68,6 +73,11 @@ public class CardAdapter extends RecyclerView.Adapter {
                 break;
             case MOVIES:
                 System.out.println("Inflating viewHolder: movies");
+
+            case POKEMON:
+                System.out.println("Inflating viewHolder: pokemon");
+                viewHolder = new PokeViewHolder(parent);
+                break;
             //3. Inflating your personalized view holder...
             //   Add a case for <your_card_constant>
             //   set viewHolder = new custom <your_view_holder_class> that you'll make
@@ -98,6 +108,10 @@ public class CardAdapter extends RecyclerView.Adapter {
             case MOVIES:
                 MoviesViewHolder moviesViewHolder = (MoviesViewHolder) holder;
                 moviesViewHolder.bind(dataList.get(position));
+                break;
+            case POKEMON:
+                PokeViewHolder pokeViewHolder = (PokeViewHolder) holder;
+                pokeViewHolder.bind(dataList.get(position));
                 break;
             //4. Data that is in dataList.get(position) is the data you sent from MainActivity
             //   You'll then send this data to your view holder class here
