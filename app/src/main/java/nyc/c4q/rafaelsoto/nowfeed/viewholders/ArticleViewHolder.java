@@ -1,4 +1,4 @@
-package nyc.c4q.rafaelsoto.nowfeed;
+package nyc.c4q.rafaelsoto.nowfeed.viewholders;
 
 import android.content.Intent;
 import android.net.Uri;
@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 
+import nyc.c4q.rafaelsoto.nowfeed.R;
 import nyc.c4q.rafaelsoto.nowfeed.models.newsapi.Article;
 
 /**
@@ -40,7 +41,7 @@ public class ArticleViewHolder extends RecyclerView.ViewHolder {
         return inflater.inflate(R.layout.news_item_layout, parent, false);
     }
 
-    void bind(Article article) {
+    public void bind(Article article) {
 
         String title = article.getTitle();
         String author = "By: " + article.getAuthor();

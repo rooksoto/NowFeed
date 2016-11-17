@@ -21,10 +21,6 @@ import nyc.c4q.rafaelsoto.nowfeed.models.newsapi.NewsFeed;
  */
 public class NewsViewHolder extends RecyclerView.ViewHolder {
 
-    private ImageView newsImage;
-    private TextView headline;
-    private URL newsLink;
-
     private final View mView;
     private RecyclerView recyclerView;
 
@@ -49,9 +45,6 @@ public class NewsViewHolder extends RecyclerView.ViewHolder {
         NewsCardAdapter adapter = (NewsCardAdapter) recyclerView.getAdapter();
 
         adapter.setArticlesList(articlesList);
-
-
-
     }
 }
 

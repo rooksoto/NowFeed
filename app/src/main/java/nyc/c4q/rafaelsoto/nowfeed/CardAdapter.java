@@ -8,8 +8,10 @@ import java.util.List;
 
 import nyc.c4q.rafaelsoto.nowfeed.models.darksky.Forecast;
 import nyc.c4q.rafaelsoto.nowfeed.models.newsapi.NewsFeed;
+import nyc.c4q.rafaelsoto.nowfeed.models.tmdb.TmdbData;
 import nyc.c4q.rafaelsoto.nowfeed.models.youtube.YoutubeItem;
 import nyc.c4q.rafaelsoto.nowfeed.viewholders.DefaultViewHolder;
+import nyc.c4q.rafaelsoto.nowfeed.viewholders.MoviesViewHolder;
 import nyc.c4q.rafaelsoto.nowfeed.viewholders.NewsViewHolder;
 import nyc.c4q.rafaelsoto.nowfeed.viewholders.WeatherViewHolder;
 import nyc.c4q.rafaelsoto.nowfeed.viewholders.YoutubeViewHolder;
@@ -21,7 +23,7 @@ public class CardAdapter extends RecyclerView.Adapter {
     private List<Object> dataList = new ArrayList<Object>(); //List of objects, anything can be placed in here
 
     //1. Add a final number to your "card", example: YOUTUBE = 2, and so on...
-    private final int WEATHER = 0, YOUTUBE = 1, ARTICLES = 2;
+    private final int WEATHER = 0, YOUTUBE = 1, ARTICLES = 2, MOVIES = 3;
 
     @Override
     public int getItemViewType(int position) {
@@ -34,6 +36,9 @@ public class CardAdapter extends RecyclerView.Adapter {
         } else if (dataList.get(position) instanceof NewsFeed) {
             System.out.println("getItemViewType: articles");
             return ARTICLES;
+        } else if (dataList.get(position) instanceof TmdbData) {
+            System.out.println("getItemViewType: movies");
+            return MOVIES;
         }
 
         //2. getItemViewType() returns constant number depending on the type of object in the dataList
@@ -61,6 +66,8 @@ public class CardAdapter extends RecyclerView.Adapter {
                 System.out.println("Inflating viewHolder: articles");
                 viewHolder = new NewsViewHolder(parent);
                 break;
+            case MOVIES:
+                System.out.println("Inflating viewHolder: movies");
             //3. Inflating your personalized view holder...
             //   Add a case for <your_card_constant>
             //   set viewHolder = new custom <your_view_holder_class> that you'll make
@@ -87,6 +94,10 @@ public class CardAdapter extends RecyclerView.Adapter {
             case ARTICLES:
                 NewsViewHolder newsViewHolder = (NewsViewHolder) holder;
                 newsViewHolder.bind(dataList.get(position));
+                break;
+            case MOVIES:
+                MoviesViewHolder moviesViewHolder = (MoviesViewHolder) holder;
+                moviesViewHolder.bind(dataList.get(position));
                 break;
             //4. Data that is in dataList.get(position) is the data you sent from MainActivity
             //   You'll then send this data to your view holder class here

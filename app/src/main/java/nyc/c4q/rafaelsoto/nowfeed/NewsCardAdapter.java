@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import nyc.c4q.rafaelsoto.nowfeed.models.newsapi.Article;
+import nyc.c4q.rafaelsoto.nowfeed.viewholders.ArticleViewHolder;
 
 
 /**
