@@ -11,10 +11,13 @@ import android.widget.Toast;
 import nyc.c4q.rafaelsoto.nowfeed.models.darksky.Forecast;
 import nyc.c4q.rafaelsoto.nowfeed.models.geolocation.GeoLocation;
 import nyc.c4q.rafaelsoto.nowfeed.models.newsapi.NewsFeed;
+import nyc.c4q.rafaelsoto.nowfeed.models.tmdb.Result;
+import nyc.c4q.rafaelsoto.nowfeed.models.tmdb.TmdbData;
 import nyc.c4q.rafaelsoto.nowfeed.models.youtube.YoutubeItem;
 import nyc.c4q.rafaelsoto.nowfeed.networks.darksky.DarkSkyClient;
 import nyc.c4q.rafaelsoto.nowfeed.networks.geolocation.GeoLocationClient;
 import nyc.c4q.rafaelsoto.nowfeed.networks.newsapi.NewsApiClient;
+import nyc.c4q.rafaelsoto.nowfeed.networks.tmdb.TmdbApiClient;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -24,6 +27,7 @@ public class MainActivity extends AppCompatActivity {
     private GeoLocationClient geoLocation;
     private DarkSkyClient darkSkyClient;
     private NewsApiClient newsApiClient;
+    private TmdbApiClient tmdbApiClient;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +53,7 @@ public class MainActivity extends AppCompatActivity {
         initYoutubeCard();
         initGeoLocation(); //will also call initWeatherCard within
         createNewsCards();
+        createMovieCards();
     }
 
     private void initYoutubeCard() {
@@ -102,8 +107,6 @@ public class MainActivity extends AppCompatActivity {
                 NewsFeed newsFeed = response.body();
                 CardAdapter cardAdapter = (CardAdapter) recyclerView.getAdapter();
                 cardAdapter.addToDataList(newsFeed);
-                System.out.println(response.body().toString());
-
             }
 
             @Override
@@ -113,6 +116,27 @@ public class MainActivity extends AppCompatActivity {
 
             }
 
+        });
+    }
+
+    private void createMovieCards() {
+        tmdbApiClient = TmdbApiClient.getInstance();
+        Call<TmdbData> call = tmdbApiClient.getResults();
+        call.enqueue(new Callback<TmdbData>() {
+            @Override
+            public void onResponse(Call<TmdbData> call, Response<TmdbData> response) {
+                TmdbData tmdbData = response.body();
+                CardAdapter cardAdapter = (CardAdapter) recyclerView.getAdapter();
+                cardAdapter.addToDataList(tmdbData);
+                System.out.println(tmdbData.toString());
+            }
+
+            @Override
+            public void onFailure(Call<TmdbData> call, Throwable t) {
+
+                Toast.makeText(getBaseContext(), "Error getting data from TMDB.Org.", Toast.LENGTH_SHORT).show();
+
+            }
         });
     }
 }
