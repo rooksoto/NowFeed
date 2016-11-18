@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -20,6 +21,8 @@ import nyc.c4q.rafaelsoto.nowfeed.R;
 import nyc.c4q.rafaelsoto.nowfeed.models.pokeapi.DetailPokeModel;
 import nyc.c4q.rafaelsoto.nowfeed.models.pokeapi.PokeModel;
 import nyc.c4q.rafaelsoto.nowfeed.models.pokeapi.Result;
+import nyc.c4q.rafaelsoto.nowfeed.models.pokeapi.Stat;
+import nyc.c4q.rafaelsoto.nowfeed.models.pokeapi.Type;
 import nyc.c4q.rafaelsoto.nowfeed.networks.pokeapi.PokeClient;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -35,6 +38,9 @@ public class PokeViewHolder extends RecyclerView.ViewHolder implements View.OnCl
     private TextView pokeTv;
     private Button pokeBtn;
     private ImageView pokeImage;
+    private TextView pokeType;
+    private TextView pokeStat;
+    private RelativeLayout pokeContainer;
     private Map<Integer,DetailPokeModel> pokeCachedMap;
 
     private boolean hasLoaded;
@@ -45,6 +51,9 @@ public class PokeViewHolder extends RecyclerView.ViewHolder implements View.OnCl
         pokeTv = (TextView) mView.findViewById(R.id.poke_tv);
         pokeBtn = (Button) mView.findViewById(R.id.poke_btn);
         pokeImage = (ImageView) mView.findViewById(R.id.poke_image);
+        pokeType = (TextView) mView.findViewById(R.id.poke_tv_type);
+        pokeStat = (TextView) mView.findViewById(R.id.poke_tv_stat);
+        pokeContainer = (RelativeLayout) mView.findViewById(R.id.poke_container);
         pokeCachedMap = new HashMap<>();
         pokeBtn.setOnClickListener(this);
     }
@@ -63,16 +72,14 @@ public class PokeViewHolder extends RecyclerView.ViewHolder implements View.OnCl
 
         if (pokeCachedMap.containsKey(randomNum+1)) {
             DetailPokeModel model = pokeCachedMap.get(randomNum+1);
-            String spriteUrl = model.getSprites().getFrontDefault();
-            Glide.with(mView.getContext()).load(spriteUrl).into(pokeImage);
-            pokeTv.setText(model.getName());
+            setPokeViews(model);
             hasLoaded = true;
         } else {
-            setPokeCardContent(randomNum + 1);
+            callPokeApi(randomNum + 1);
         }
     }
 
-    private void setPokeCardContent(final int randomNum) {
+    private void callPokeApi(final int randomNum) {
         PokeClient client = PokeClient.getInstance();
         Call<DetailPokeModel> call = client.getSpecificPokemon(randomNum);
         call.enqueue(new Callback<DetailPokeModel>() {
@@ -80,14 +87,8 @@ public class PokeViewHolder extends RecyclerView.ViewHolder implements View.OnCl
             public void onResponse(Call<DetailPokeModel> call, Response<DetailPokeModel> response) {
                 System.out.println("GOT A RESPONSE FOR POKE IMAGE");
                 DetailPokeModel model = response.body();
-                System.out.println(model);
-                String spriteUrl = model.getSprites().getFrontDefault();
-                System.out.println(spriteUrl);
-                Glide.with(mView.getContext()).load(spriteUrl).into(pokeImage);
-                pokeTv.setText(model.getName());
-
+                setPokeViews(model);
                 pokeCachedMap.put(randomNum, model);
-
                 hasLoaded = true;
             }
 
@@ -108,12 +109,10 @@ public class PokeViewHolder extends RecyclerView.ViewHolder implements View.OnCl
                     int randomNum = getRandomNum();
                     if (pokeCachedMap.containsKey(randomNum+1)) {
                         DetailPokeModel model = pokeCachedMap.get(randomNum+1);
-                        String spriteUrl = model.getSprites().getFrontDefault();
-                        Glide.with(mView.getContext()).load(spriteUrl).into(pokeImage);
-                        pokeTv.setText(model.getName());
+                        setPokeViews(model);
                         hasLoaded = true;
                     } else {
-                        setPokeCardContent(randomNum + 1);
+                        callPokeApi(randomNum + 1);
                     }
                 } else {
                     System.out.println("Pokemon not yet loaded ");
@@ -121,8 +120,84 @@ public class PokeViewHolder extends RecyclerView.ViewHolder implements View.OnCl
         }
     }
 
+    public void setPokeViews(DetailPokeModel model) {
+        //Left column
+        String spriteUrl = model.getSprites().getFrontDefault();
+        Glide.with(mView.getContext()).load(spriteUrl).into(pokeImage);
+        pokeTv.setText(model.getName());
+
+        //Right column
+        List<Type> typeList = model.getTypes();
+        String typeString = "";
+        for (int i = 0; i < typeList.size(); i++) {
+            typeString += typeList.get(i).getType().getName() + "\n";
+        }
+        pokeType.setText(typeString);
+
+        List<Stat> statList = model.getStats();
+        String statString = "";
+        for (int i = 0; i < statList.size(); i++) {
+            statString += statList.get(i).getStat().getName() + ": " + statList.get(i).getBaseStat() + "\n";
+        }
+        pokeStat.setText(statString);
+
+        setBackgroundColor(typeList);
+    }
+
+    private void setBackgroundColor(List<Type> typeList) {
+        for (Type type : typeList) {
+            String typeName = type.getType().getName();
+            switch (typeName) {
+                case "grass":
+                    pokeContainer.setBackgroundResource(R.color.grassGreen);
+                    break;
+                case "bug":
+                    pokeContainer.setBackgroundResource(R.color.grassGreen);
+                    break;
+                case "ghost":
+                    pokeContainer.setBackgroundResource(R.color.ghostPurple);
+                    break;
+                case "water":
+                    pokeContainer.setBackgroundResource(R.color.waterBlue);
+                    break;
+                case "ice":
+                    pokeContainer.setBackgroundResource(R.color.iceBlue);
+                    break;
+                case "fire":
+                    pokeContainer.setBackgroundResource(R.color.fireRed);
+                    break;
+                case "ground":
+                    pokeContainer.setBackgroundResource(R.color.groundBrown);
+                    break;
+                case "rock":
+                    pokeContainer.setBackgroundResource(R.color.groundBrown);
+                    break;
+                case "normal":
+                    pokeContainer.setBackgroundResource(R.color.normalSkin);
+                    break;
+                case "fighting":
+                    pokeContainer.setBackgroundResource(R.color.fightingSkin);
+                    break;
+                case "electric":
+                    pokeContainer.setBackgroundResource(R.color.electricYellow);
+                    break;
+                case "psychic":
+                    pokeContainer.setBackgroundResource(R.color.psychicPurple);
+                    break;
+                case "dragon":
+                    pokeContainer.setBackgroundResource(R.color.dragonGreen);
+                    break;
+                default:
+                    pokeContainer.setBackgroundColor(0x70000000);
+            }
+        }
+    }
+
+
     public int getRandomNum() {
         Random rand = new Random();
         return rand.nextInt(151);
     }
+
+
 }

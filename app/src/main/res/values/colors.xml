@@ -11,4 +11,19 @@
     <color name="fourtyAlphaPink">#40F06292</color>
     <color name="ninetyAlphaGray">#90616161</color>
     <color name="fourtyAlphaGray">#40616161</color>
+
+    <color name="grassGreen">#C5E1A5</color>
+    <color name="waterBlue">#B3E5FC</color>
+    <color name="fireRed">#EF9A9A</color>
+    <color name="groundBrown">#A1887F</color>
+    <color name="normalSkin">#FFD180</color>
+    <color name="fightingSkin">#FFAB40</color>
+    <color name="psychicPurple">#D1C4E9</color>
+    <color name="electricYellow">#FFF59D</color>
+    <color name="ghostPurple">#B388FF</color>
+    <color name="dragonGreen">#69F0AE</color>
+    <color name="iceBlue">#84FFFF</color>
+
+
+
 </resources>
