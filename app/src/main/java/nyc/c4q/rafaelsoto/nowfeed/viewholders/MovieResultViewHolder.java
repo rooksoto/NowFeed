@@ -6,6 +6,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -22,10 +23,13 @@ public class MovieResultViewHolder extends RecyclerView.ViewHolder {
     private ImageView moviePoster;
     private TextView movieTitle;
     private TextView movieBlurb;
-    private Intent intent;
+    private Button getTickets;
+    private Intent detailIntent;
+    private Intent ticketsIntent;
 
     private final View mView;
-    private View.OnClickListener openInBrowser;
+    private View.OnClickListener openOnTMDB;
+    private View.OnClickListener openOnFandango;
 
     public MovieResultViewHolder(ViewGroup parent) {
         super(inflateView(parent));
@@ -34,6 +38,7 @@ public class MovieResultViewHolder extends RecyclerView.ViewHolder {
         moviePoster = (ImageView) mView.findViewById(R.id.movie_poster_image);
         movieTitle = (TextView) mView.findViewById(R.id.movie_title);
         movieBlurb = (TextView) mView.findViewById(R.id.movie_blurb);
+        getTickets = (Button) mView.findViewById(R.id.get_tickets_button);
     }
 
     private static View inflateView(ViewGroup parent) {
@@ -52,18 +57,26 @@ public class MovieResultViewHolder extends RecyclerView.ViewHolder {
         movieTitle.setText(title);
         movieBlurb.setText(blurb);
 
-        movieTitle.setOnClickListener(openInBrowser);
-        moviePoster.setOnClickListener(openInBrowser);
+        movieTitle.setOnClickListener(openOnTMDB);
+        moviePoster.setOnClickListener(openOnTMDB);
+        movieBlurb.setOnClickListener(openOnTMDB);
+        getTickets.setOnClickListener(openOnFandango);
 
-//        intent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://api.themoviedb.org/3/movie/" + result.getId() + "/videos?api_key=3eea98d386bf057ace88e9606014c8f0"));
-//
-//
-//
-//        openInBrowser = new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                mView.getContext().startActivity(intent);
-//            }
-//        };
+        detailIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.themoviedb.org/movie/" + String.valueOf(result.getId())));
+        ticketsIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.fandango.com/search?q=" + result.getTitle()));
+
+        openOnTMDB = new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                mView.getContext().startActivity(detailIntent);
+            }
+        };
+
+        openOnFandango = new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mView.getContext().startActivity(ticketsIntent);
+            }
+        };
     }
 }

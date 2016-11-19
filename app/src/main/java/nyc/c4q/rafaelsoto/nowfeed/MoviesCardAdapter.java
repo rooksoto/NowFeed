@@ -20,7 +20,7 @@ public class MoviesCardAdapter extends RecyclerView.Adapter {
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        return new MoviesViewHolder(parent);
+        return new MovieResultViewHolder(parent);
     }
 
     @Override

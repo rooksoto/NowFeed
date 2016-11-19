@@ -70,7 +70,7 @@ public class Result {
         return video;
     }
 
-    public Integer getVoteAverage() {
+    public Double getVoteAverage() {
         return voteAverage;
     }
 
@@ -107,6 +107,6 @@ public class Result {
     public Boolean video;
     @SerializedName("vote_average")
     @Expose
-    public Integer voteAverage;
+    public Double voteAverage;
 
 }
