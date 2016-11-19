@@ -73,6 +73,8 @@ public class CardAdapter extends RecyclerView.Adapter {
                 break;
             case MOVIES:
                 System.out.println("Inflating viewHolder: movies");
+                viewHolder = new MoviesViewHolder(parent);
+                break;
 
             case POKEMON:
                 System.out.println("Inflating viewHolder: pokemon");

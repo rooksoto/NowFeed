@@ -131,12 +131,13 @@ public class MainActivity extends AppCompatActivity {
                 TmdbData tmdbData = response.body();
                 CardAdapter cardAdapter = (CardAdapter) recyclerView.getAdapter();
                 cardAdapter.addToDataList(tmdbData);
-                System.out.println(tmdbData.toString());
+//                System.out.println(tmdbData.toString());
             }
 
             @Override
             public void onFailure(Call<TmdbData> call, Throwable t) {
 
+                t.printStackTrace();
                 Toast.makeText(getBaseContext(), "Error getting data from TMDB.Org.", Toast.LENGTH_SHORT).show();
 
             }

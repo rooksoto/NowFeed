@@ -12,41 +12,53 @@
     card_view:cardElevation="10dp">
 
     <LinearLayout
+        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/colorPrimary"
-        android:orientation="vertical"
         android:weightSum="12">
 
         <ImageView
             android:id="@+id/movie_poster_image"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_gravity="center_horizontal"
+            android:layout_gravity="center_horizontal|center_vertical"
             android:layout_margin="6dp"
             android:layout_weight="5"
-            android:scaleType="centerCrop" />
+            android:scaleType="centerCrop"
+            android:cropToPadding="true" />
 
         <TextView
             android:id="@+id/movie_title"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:gravity="top"
+            android:layout_height="0dp"
             android:layout_margin="6dp"
             android:text="This is test text. Trump won the election, people are worried, it's a crazy world and stuff."
             android:textColor="@color/colorAccent"
-            android:textSize="15sp"
-            android:maxLines="2"/>
+            android:textSize="14sp"
+            android:maxLines="1"
+            android:layout_weight="1"/>
         <TextView
             android:id="@+id/movie_blurb"
             android:layout_width="match_parent"
-            android:layout_height="152dp"
             android:layout_margin="6dp"
             android:text="This is test text. Trump won the election, people are worried, it's a crazy world and stuff."
             android:textColor="#03A9F4"
-            android:textSize="13sp"
+            android:textSize="12sp"
             android:ellipsize="end"
-            android:maxLines="6"
-            android:gravity="top"/>
+            android:maxLines="4"
+            android:gravity="top"
+            android:layout_height="0dp"
+            android:layout_weight="4" />
+        <Button
+            android:text="Showtimes/Tickets"
+            android:textSize="10sp"
+            android:background="@color/colorAccent"
+            android:id="@+id/get_tickets_button"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="2"/>
 
     </LinearLayout>
 </android.support.v7.widget.CardView>
