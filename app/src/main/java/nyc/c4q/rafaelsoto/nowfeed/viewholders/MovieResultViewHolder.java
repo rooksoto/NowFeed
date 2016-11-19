@@ -63,7 +63,7 @@ public class MovieResultViewHolder extends RecyclerView.ViewHolder {
         getTickets.setOnClickListener(openOnFandango);
 
         detailIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.themoviedb.org/movie/" + String.valueOf(result.getId())));
-        ticketsIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.fandango.com/search?q=" + result.getTitle()));
+        ticketsIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://mobile.fandango.com/search?query=" + result.getTitle()));
 
         openOnTMDB = new View.OnClickListener() {
             @Override
